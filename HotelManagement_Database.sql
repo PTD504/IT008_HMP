@@ -1,4 +1,4 @@
-CREATE DATABASE HotelManagementDB
+﻿CREATE DATABASE HotelManagementDB
 GO
 USE HotelManagementDB
 GO
@@ -10,7 +10,7 @@ CREATE TABLE [Hotel]
 	[hotelAddress]			NVARCHAR(100),
 	[hotelPhone]			CHAR(10),
 	[hotelEmail]			VARCHAR(50),
-	[hotelStars]			DECIMAL(2, 2)
+	[hotelStars]			DECIMAL(2, 1)
 )
 GO
 
@@ -21,8 +21,18 @@ CREATE TABLE [Employees]
 	[employeeBirth]			DATE,
 	[employeePhone]			CHAR(10),
 	[employeeEmail]			VARCHAR(50),
-	[employeePosition]		NVARCHAR(50),
-	[employeeHire]			DATE
+	[employeePosition]		NVARCHAR(50) DEFAULT 'Nhân viên', -- ('Quản lý' || 'Nhân viên')
+	[employeeHire]			DATE,
+	CONSTRAINT chk_employeePosition CHECK (employeePosition IN ('Quản lý', 'Nhân viên'))
+)
+GO
+
+CREATE TABLE [Accounts]
+(
+	[accountID]				INT IDENTITY(1, 1) PRIMARY KEY,
+	[username]				VARCHAR(50) NOT NULL,
+	[password]				VARCHAR(50) NOT NULL,
+	[employeeID]			INT FOREIGN KEY REFERENCES Employees(employeeID)
 )
 GO
 
@@ -68,11 +78,11 @@ CREATE TABLE [Bookings]
 (
 	[bookingID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[guestID]				INT FOREIGN KEY REFERENCES Guests(guestID),
-	[employeeID]			INT FOREIGN KEY REFERENCES Employees(employeeID),
 	[roomID]				INT FOREIGN KEY REFERENCES Rooms(roomID),
 	[serviceID]				INT FOREIGN KEY REFERENCES AdServices(serviceID),
 	[checkinDate]			DATE,
 	[checkoutDate]			DATE,
+	[discount]				MONEY,
 	[totalPrice]			MONEY
 )
 GO
@@ -81,6 +91,7 @@ CREATE TABLE [Payments]
 (
 	[paymentID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[bookingID]				INT FOREIGN KEY REFERENCES Bookings(bookingID),
+	[employeeID]			INT FOREIGN KEY REFERENCES Employees(employeeID),
 	[payAmount]				MONEY,
 	[payDate]				DATE,
 	[payMethod]				NVARCHAR(50)
