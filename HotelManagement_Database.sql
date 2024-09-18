@@ -3,31 +3,31 @@ GO
 USE HotelManagementDB
 GO
 
-CREATE TABLE [Hotel] 
+CREATE TABLE [dbo].[Hotel] 
 (
 	[hotelID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[hotelName]				NVARCHAR(30),
 	[hotelAddress]			NVARCHAR(100),
 	[hotelPhone]			CHAR(10),
-	[hotelEmail]			VARCHAR(50),
-	[hotelStars]			DECIMAL(2, 1)
+	[hotelEmail]			VARCHAR(50)
+	-- [hotelStars]			DECIMAL(2, 1)
 )
 GO
 
-CREATE TABLE [Employees] 
+CREATE TABLE [dbo].[Employees] 
 (
 	[employeeID]			INT IDENTITY(1, 1) PRIMARY KEY,
 	[employeeName]			NVARCHAR(40),
 	[employeeBirth]			DATE,
 	[employeePhone]			CHAR(10),
 	[employeeEmail]			VARCHAR(50),
-	[employeePosition]		NVARCHAR(50) DEFAULT 'Nhân viên', -- ('Quản lý' || 'Nhân viên')
+	[employeePosition]		SMALLINT DEFAULT 1, -- (0 : 'Quản lý' || 1 : 'Nhân viên')
 	[employeeHire]			DATE,
 	CONSTRAINT chk_employeePosition CHECK (employeePosition IN ('Quản lý', 'Nhân viên'))
 )
 GO
 
-CREATE TABLE [Accounts]
+CREATE TABLE [dbo].[Accounts]
 (
 	[accountID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[username]				VARCHAR(50) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE [Accounts]
 )
 GO
 
-CREATE TABLE [Guests] 
+CREATE TABLE [dbo].[Guests] 
 (
 	[guestID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[guestName]				NVARCHAR(40),
@@ -47,16 +47,16 @@ CREATE TABLE [Guests]
 )
 GO
 
-CREATE TABLE [RoomTypes] 
+CREATE TABLE [dbo].[RoomTypes] 
 (
 	[typeID]				INT IDENTITY(1, 1) PRIMARY KEY,
-	[typeDescription]		NVARCHAR(100),
+	[typeName]		NVARCHAR(100),
 	[typeRoomPrice]			MONEY,
 	[capacity]				SMALLINT
 )
 GO
 
-CREATE TABLE [Rooms] 
+CREATE TABLE [dbo].[Rooms] 
 (
 	[roomID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[roomNumber]			INT,
@@ -66,7 +66,7 @@ CREATE TABLE [Rooms]
 )
 GO
 
-CREATE TABLE [AdServices] 
+CREATE TABLE [dbo].[AdServices] 
 (
 	[serviceID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[serviceDescription]	NVARCHAR(100),
@@ -74,20 +74,21 @@ CREATE TABLE [AdServices]
 )
 GO
 
-CREATE TABLE [Bookings] 
+CREATE TABLE [dbo].[Bookings] 
 (
 	[bookingID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[guestID]				INT FOREIGN KEY REFERENCES Guests(guestID),
 	[roomID]				INT FOREIGN KEY REFERENCES Rooms(roomID),
 	[serviceID]				INT FOREIGN KEY REFERENCES AdServices(serviceID),
 	[checkinDate]			DATE,
+	-- [comfirmDate]			DATE,
 	[checkoutDate]			DATE,
-	[discount]				MONEY,
+	-- [discount]				MONEY,
 	[totalPrice]			MONEY
 )
 GO
 
-CREATE TABLE [Payments] 
+CREATE TABLE [dbo].[Payments] 
 (
 	[paymentID]				INT IDENTITY(1, 1) PRIMARY KEY,
 	[bookingID]				INT FOREIGN KEY REFERENCES Bookings(bookingID),
