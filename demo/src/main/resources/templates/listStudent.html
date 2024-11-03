@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=	, initial-scale=1.0">
+    <title>List Student</title>
+</head>
+<body>
+    <h1>Danh sách các sinh viên</h1> 
+    <table border="1px", id="table">  
+       <tr>
+        <th>Mã sinh viên</th>  
+        <th>Họ và tên</th> 
+        <th>Điểm số</th> 
+        <th>Tình trạng sinh viên</th>
+        
+       </tr> 
+
+
+         </table>  
+         <br>
+         <br> 
+         
+         <h1>Tìm kiếm sinh viên</h1>
+         <form id="searchById">  
+            <label for="studentId">Enter student Id:</label> 
+            <input id="studentId",type="number" required> 
+            <br> 
+            <input  type="submit" value="search">
+            </form> 
+        <div>
+            <p id="Id"></p> 
+            <p id="Name"></p> 
+            <p id="Score"></p> 
+            <p id="State"></p> 
+            
+        </div> 
+        <br> 
+        <p id="searchFail"></p> 
+
+        <br>
+        <br> 
+        <h1>Xóa sinh viên</h1> 
+        <form id ="deleteStudentById"> 
+            <label for="STUDENTID">Enter student Id:</label> 
+            <input id="STUDENTID",type="number" required>  
+            <br> 
+            <input  type="submit" value="delete"> 
+
+        </form> 
+        <br> 
+        <p id="deletionState"></p> 
+        <br> 
+        <br> 
+        <h1>Các chức năng khác</h1> 
+        <div> 
+            <a href="http://localhost:8080/ui/createStudent"><button>Tạo sinh viên</button></a> 
+            <a href="http://localhost:8080/ui/updateStudent"><button>Cập nhật thông tin sinh viên</button></a>
+        </div>
+         <script src="http://localhost:8080/js/listStudent.js"></script>
+</body>
+</html>

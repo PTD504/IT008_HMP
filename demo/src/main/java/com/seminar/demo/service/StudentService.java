@@ -20,7 +20,7 @@ public class StudentService {
     } 
     public Student getById(int id) //Tim kiem hoc sinh bang id
     {
-        return studentRepo.findById(id).orElse(null);
+        return studentRepo.findById(id).orElse(new Student(-1,"",-1.0f,false));
     } 
 
     public String createStudent(StudentCreationRequest request) 
@@ -46,7 +46,7 @@ public class StudentService {
     { 
         Student student=studentRepo.findById(id).orElse(null);
         if(student==null) return "Sinh vien khong ton tai"; 
-        student.setEnable(false); 
+        studentRepo.delete(student);
         return "Xoa sinh vien thanh cong";
     }
 

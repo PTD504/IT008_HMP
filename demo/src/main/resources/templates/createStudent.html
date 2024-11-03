@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo sinh viên</title>
+</head>
+<body>
+    <h1> Tạo sinh viên</h1> 
+    <form id="createStudent"> 
+        <label for="NAME">Họ và tên: </label> 
+        <input id="NAME" type="text" required>  
+        <br> 
+        <label for="SCORE">Điểm số: </label> 
+        <input id="SCORE" type="number" step="0.01" required> 
+        <br>
+        <input type="submit">
+    </form>
+    <br>
+    <p id="creationState"></p> 
+    <script src="http://localhost:8080/js/createStudent.js"></script>
+</body>
+</html>
