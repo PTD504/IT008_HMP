@@ -26,7 +26,7 @@ public class Rooms {
     private int floor;
 
     @ManyToOne
-    @JoinColumn(name="room_type_id", columnDefinition = "INT", referencedColumnName = "room_type_id") 
+    @JoinColumn(name="room_type_id", columnDefinition = "INT", referencedColumnName = "type_id") 
     private RoomTypes room_type;
 
     @Column(name="room_status", columnDefinition = "BOOLEAN") 

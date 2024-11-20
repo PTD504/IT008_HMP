@@ -14,7 +14,7 @@ import lombok.experimental.FieldNameConstants;
 public class RoomTypes { 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    @Column(name="type_id", columnDefinition ="ÏNT") 
+    @Column(name="type_id", columnDefinition ="INT") 
     private int id; 
 
     @Column(name="type_name", columnDefinition = "NVARCHAR(100)") 
