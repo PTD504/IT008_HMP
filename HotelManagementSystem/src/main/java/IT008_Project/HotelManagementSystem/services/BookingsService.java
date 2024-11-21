@@ -14,6 +14,7 @@ import IT008_Project.HotelManagementSystem.repositories.GuestRepository;
 import IT008_Project.HotelManagementSystem.repositories.RoomsRepository;
 import IT008_Project.HotelManagementSystem.repositories.ServiceRepository;
 import IT008_Project.HotelManagementSystem.response.BookingResponse;
+import IT008_Project.HotelManagementSystem.response.Response;
 
 @Service
 public class BookingsService { 
@@ -26,21 +27,21 @@ public class BookingsService {
     @Autowired 
     private ServiceRepository serviceRepo;
 
-    public ResponseEntity<BookingResponse> newBooking(BookingsCreationRequest request) 
+    public ResponseEntity<Response> newBooking(BookingsCreationRequest request) 
     {   
         IT008_Project.HotelManagementSystem.models.Service service = serviceRepo.findById(request.getServiceId()).orElse(null);
         if(service==null) 
         {
-            return new ResponseEntity<>(new BookingResponse("Khong ton tai dich vu",null), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new Response(null,"Khong ton tai dich vu"), HttpStatus.NOT_FOUND);
         }
         Rooms room = roomRepo.findById(request.getRoomId()).orElse(null); 
         if(room==null) 
         { 
-            return new ResponseEntity<>(new BookingResponse("Phong ko ton tai",null), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new Response(null,"Phong khong ton tai"), HttpStatus.NOT_FOUND);
         } 
         if(room.getRoom_Status()!=true) 
         {
-            return new ResponseEntity<>(new BookingResponse("Phong da duoc dat", null), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Response(null,"Phong da duoc dat"), HttpStatus.BAD_REQUEST);
         }
         Guest guest = guestRepo.findByIdentityCard(request.getGuestRequest().getGuestIdentityCardId());
         if(guest==null) 
@@ -61,7 +62,7 @@ public class BookingsService {
         int newBookingId = bookingsRepo.findAll().size()+1;
         Bookings newBookings= new Bookings(newBookingId,guest,room,service, request.getCheckinDate(), request.getCheckoutDate(),request.getTotalPrice());
         bookingsRepo.save(newBookings);
-        return new ResponseEntity<>(new BookingResponse("Dat phong thanh cong", newBookings), HttpStatus.OK);
+        return new ResponseEntity<>(new Response(newBookings,"Dat phong thanh cong"), HttpStatus.OK);
 
     }
 }
