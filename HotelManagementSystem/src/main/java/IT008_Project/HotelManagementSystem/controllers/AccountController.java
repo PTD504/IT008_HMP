@@ -19,24 +19,25 @@ public class AccountController {
     @Autowired 
     private AccountsService accountService;
 
-    @PostMapping("/login") 
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) 
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request)
     {
         return accountService.login(request);
-    } 
-
-    @PostMapping("/create/account") 
-    public ResponseEntity<Response> createAccount(@RequestBody Request request) 
-    { 
-        if(request.getRole()<1) 
-        { 
-            return new ResponseEntity<>(new Response(null, "Ban khong co quyen truy cap vao chuc nang nay"), HttpStatus.UNAUTHORIZED);
-        } 
-        if(request.getRequestData() instanceof AccountCreationRequest) 
-        {
-            accountService.createAccount((AccountCreationRequest)request.getRequestData());
-        } 
-        return new ResponseEntity<>(new Response(null,"Thong tin sai"), HttpStatus.BAD_REQUEST);
     }
 
+    @PostMapping("/create/account")
+    public ResponseEntity<Response> createAccount(@RequestBody Request request) {
+        if (request.getRole() < 1) {
+            return new ResponseEntity<>(new Response(null, "Bạn không có quyền truy cập vào chức năng này"), HttpStatus.UNAUTHORIZED);
+        }
+        try {
+            if (request.getRequestData() instanceof AccountCreationRequest) {
+                accountService.createAccount((AccountCreationRequest) request.getRequestData());
+                return new ResponseEntity<>(new Response(null, "Tài khoản được tạo thành công"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(new Response(null, "Thông tin sai"), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new Response(null, "Lỗi hệ thống: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
