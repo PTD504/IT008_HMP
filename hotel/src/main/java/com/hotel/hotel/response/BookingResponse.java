@@ -1,242 +1,171 @@
 package com.hotel.hotel.response;
 
-import java.time.LocalDate;
+import java.sql.Date;
+
+import com.hotel.hotel.model.Booking;
 
 public class BookingResponse {
-    private Long bookingId;
-
-    private Long roomId;
+    private int id; 
+    private int roomId;
     private String roomNumber;
-    private String roomState;
-    private String roomFloor;
-    private Double roomPrice;
-    private Double roomSize;
+    private int state;
+    private int floor;
+    private int roomTypeId;
     private String roomTypeText;
+    private int price;
+    private int size;
+    private int bedDetailId;
     private String bedDetailText;
-    
-    private Long guestId;
+
+    private int guestId;
     private String guestName;
-    private String guestCitizenId;
-    private String guestPhone;
-    private String guestEmail;
-    private LocalDate guestDob;
-    private String guestGender;
-    private String guestAddress;
-    
-    private Long staffId;
+    private String citizenId;
+    private String phone;
+    private String email;
+    private Date dob;
+    private String gender;
+    private String address;
+
+    private int staffId;
     private String staffName;
-    
-    private LocalDate checkinDate;
-    private LocalDate checkoutDate;
-    private Boolean isPaid;
-    private Double totalPrice;
 
-    public BookingResponse(Long bookingId, Long roomId, String roomNumber, String roomState, String roomFloor, Double roomPrice, Double roomSize, String roomTypeText, String bedDetailText, Long guestId, String guestName, String guestCitizenId, String guestPhone, String guestEmail, LocalDate guestDob, String guestGender, String guestAddress, Long staffId, String staffName, LocalDate checkinDate, LocalDate checkoutDate, Boolean isPaid, Double totalPrice) {
-        this.bookingId = bookingId;
-        this.roomId = roomId;
-        this.roomNumber = roomNumber;
-        this.roomState = roomState;
-        this.roomFloor = roomFloor;
-        this.roomPrice = roomPrice;
-        this.roomSize = roomSize;
-        this.roomTypeText = roomTypeText;
-        this.bedDetailText = bedDetailText;
-        this.guestId = guestId;
-        this.guestName = guestName;
-        this.guestCitizenId = guestCitizenId;
-        this.guestPhone = guestPhone;
-        this.guestEmail = guestEmail;
-        this.guestDob = guestDob;
-        this.guestGender = guestGender;
-        this.guestAddress = guestAddress;
-        this.staffId = staffId;
-        this.staffName = staffName;
-        this.checkinDate = checkinDate;
-        this.checkoutDate = checkoutDate;
-        this.isPaid = isPaid;
-        this.totalPrice = totalPrice;
+    private Date checkinDate;
+    private Date checkoutDate;
+    private boolean isPaid;
+    private int totalPrice;
+
+    public BookingResponse() {
+    }
+    public BookingResponse(Booking booking)
+    {
+        this.id= booking.getId();
+        this.roomId= booking.getRoom().getId();
+        this.roomNumber= booking.getRoom().getRoomNumber();
+        this.state= booking.getRoom().getState();
+        this.floor= booking.getRoom().getFloor();
+        this.roomTypeId=booking.getRoom().getRoomType().getId();
+        this.roomTypeText= booking.getRoom().getRoomType().getRoomTypeText();
+        this.price= booking.getRoom().getRoomType().getPrice();
+        this.size= booking.getRoom().getRoomType().getSize();
+        this.bedDetailId= booking.getRoom().getRoomType().getBedDetail().getId();
+        this.bedDetailText=booking.getRoom().getRoomType().getBedDetail().getBedDetailText();
+        
+        this.guestId= booking.getGuest().getId();
+        this.guestName= booking.getGuest().getName();
+        this.citizenId = booking.getGuest().getCitizenId();
+        this.phone=booking.getGuest().getPhone();
+        this.email=booking.getGuest().getEmail();
+        this.dob= booking.getGuest().getDob();
+        this.gender= booking.getGuest().getGender();
+        this.address= booking.getGuest().getAddress();
+
+        this.staffId= booking.getStaff().getId();
+        this.staffName= booking.getStaff().getName();
+
+        this.checkinDate= booking.getCheckinDate();
+        this.checkoutDate=booking.getCheckoutDate();
+        this.isPaid= booking.getIsPaid();
+        this.totalPrice=booking.getTotalPrice();
     }
 
-    public Long getBookingId() {
-        return bookingId;
+    public int getId() 
+    {
+        return this.id;
+    } 
+    public int getRoomId() 
+    {
+        return this.roomId;
+    } 
+    public String getRoomNumber() 
+    {
+        return this.roomNumber;
+    } 
+    public int getState() 
+    {
+        return this.state;
+    } 
+    public int getFloor() 
+    {
+        return this.floor;
+    } 
+    public int getRoomTypeId() 
+    {
+        return this.roomTypeId;
     }
-
-    public void setBookingId(Long bookingId) {
-        this.bookingId = bookingId;
+    public String getRoomTypeText() 
+    {
+        return this.roomTypeText;
+    } 
+    public int getPrice() 
+    {
+        return this.price;
+    } 
+    public int getSize() 
+    {
+        return this.size;
+    } 
+    public int getBedDetailId() 
+    {
+        return this.bedDetailId;
     }
-
-    public Long getRoomId() {
-        return roomId;
+    public String getBedDetailText() 
+    {
+        return this.bedDetailText;
     }
-
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
+    public int getGuestId() 
+    {
+        return this.guestId;
     }
-
-    public String getRoomNumber() {
-        return roomNumber;
+    public String getGuestName() 
+    {
+        return this.guestName;
     }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
+    public String getCitizenId() 
+    {
+        return this.citizenId;
     }
-
-    public String getRoomState() {
-        return roomState;
+    public String getPhone() 
+    {
+        return this.phone;
     }
-
-    public void setRoomState(String roomState) {
-        this.roomState = roomState;
+    public String getEmail() 
+    {
+        return this.email;
     }
-
-    public String getRoomFloor() {
-        return roomFloor;
+    public Date getDob() 
+    {
+        return this.dob;
+    } 
+    public String getGender() 
+    {
+        return this.gender;
+    } 
+    public String getAddress() 
+    {
+        return this.address;
+    } 
+    public int getStaffId() 
+    {
+        return this.staffId;
     }
-
-    public void setRoomFloor(String roomFloor) {
-        this.roomFloor = roomFloor;
+    public String getStaffName() 
+    {
+        return this.staffName;
     }
-
-    public Double getRoomPrice() {
-        return roomPrice;
+    public Date getCheckinDate() 
+    {
+        return this.checkinDate;
     }
-    public void setRoomPrice(Double roomPrice) {
-        this.roomPrice = roomPrice;
+    public Date getCheckoutDate() 
+    {
+        return this.checkoutDate;
     }
-
-    public Double getRoomSize() {
-        return roomSize;
+    public boolean getIsPaid() 
+    {
+        return this.isPaid;
     }
-
-    public void setRoomSize(Double roomSize) {
-        this.roomSize = roomSize;
-    }
-
-    public String getRoomTypeText() {
-        return roomTypeText;
-    }
-
-    public void setRoomTypeText(String roomTypeText) {
-        this.roomTypeText = roomTypeText;
-    }
-
-    public String getBedDetailText() {
-        return bedDetailText;
-    }
-
-    public void setBedDetailText(String bedDetailText) {
-        this.bedDetailText = bedDetailText;
-    }
-
-    public Long getGuestId() {
-        return guestId;
-    }
-
-    public void setGuestId(Long guestId) {
-        this.guestId = guestId;
-    }
-
-    public String getGuestName() {
-        return guestName;
-    }
-
-    public void setGuestName(String guestName) {
-        this.guestName = guestName;
-    }
-
-    public String getGuestCitizenId() {
-        return guestCitizenId;
-    }
-
-    public void setGuestCitizenId(String guestCitizenId) {
-        this.guestCitizenId = guestCitizenId;
-    }
-
-    public String getGuestPhone() {
-        return guestPhone;
-    }
-
-    public void setGuestPhone(String guestPhone) {
-        this.guestPhone = guestPhone;
-    }
-
-    public String getGuestEmail() {
-        return guestEmail;
-    }
-
-    public void setGuestEmail(String guestEmail) {
-        this.guestEmail = guestEmail;
-    }
-
-    public LocalDate getGuestDob() {
-        return guestDob;
-    }
-
-    public void setGuestDob(LocalDate guestDob) {
-        this.guestDob = guestDob;
-    }
-
-    public String getGuestGender() {
-        return guestGender;
-    }
-
-    public void setGuestGender(String guestGender) {
-        this.guestGender = guestGender;
-    }
-
-    public String getGuestAddress() {
-        return guestAddress;
-    }
-
-    public void setGuestAddress(String guestAddress) {
-        this.guestAddress = guestAddress;
-    }
-
-    public Long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Long staffId) {
-        this.staffId = staffId;
-    }
-
-    public String getStaffName() {
-        return staffName;
-    }
-
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
-    }
-
-    public LocalDate getCheckinDate() {
-        return checkinDate;
-    }
-
-    public void setCheckinDate(LocalDate checkinDate) {
-        this.checkinDate = checkinDate;
-    }
-
-    public LocalDate getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public void setCheckoutDate(LocalDate checkoutDate) {
-        this.checkoutDate = checkoutDate;
-    }
-
-    public Boolean getPaid() {
-        return isPaid;
-    }
-
-    public void setPaid(Boolean paid) {
-        isPaid = paid;
-    }
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public int getTotalPrice()
+    {
+        return this.totalPrice;
     }
 }

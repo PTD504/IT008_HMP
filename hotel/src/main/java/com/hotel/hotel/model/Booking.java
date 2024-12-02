@@ -40,7 +40,7 @@ public class Booking {
     @Column(name="ISPAID", columnDefinition = "BOOLEAN")
     private boolean isPaid;
 
-    @Column(name="TOTALPRIEC", columnDefinition = "INT") 
+    @Column(name="TOTALPRICE", columnDefinition = "INT") 
     private int totalPrice;
 
     public Booking() 
