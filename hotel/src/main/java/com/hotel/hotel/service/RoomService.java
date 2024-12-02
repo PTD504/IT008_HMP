@@ -1,4 +1,4 @@
-package com.hotel.hotel;
+package com.hotel.hotel.service;
 
 import java.util.ArrayList;
 import java.util.List;

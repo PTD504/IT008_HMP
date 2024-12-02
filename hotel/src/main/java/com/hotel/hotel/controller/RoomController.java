@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.hotel.RoomService;
 import com.hotel.hotel.response.RoomResponse;
+import com.hotel.hotel.service.RoomService;
 
 @RestController
 public class RoomController { 
