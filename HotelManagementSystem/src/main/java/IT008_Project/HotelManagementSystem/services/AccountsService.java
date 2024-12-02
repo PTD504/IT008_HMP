@@ -1,4 +1,4 @@
-package IT008_Project.HotelManagementSystem.services;
+/*package IT008_Project.HotelManagementSystem.services;
 
 import IT008_Project.HotelManagementSystem.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +55,4 @@ public class AccountsService {
          return new ResponseEntity<>(new Response(newAccount, "Tạo tài khoản thành công"), HttpStatus.OK);
     }
 
-}
+}*/
