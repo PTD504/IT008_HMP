@@ -15,7 +15,7 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
 
-    @GetMapping("/staffs") 
+    @GetMapping("/staffs/") 
     public ResponseEntity<List<StaffResponse>> getAllStaff() 
     {
         return staffService.getAllStaff();

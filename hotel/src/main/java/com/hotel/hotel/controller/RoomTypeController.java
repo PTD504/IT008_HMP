@@ -14,7 +14,7 @@ import com.hotel.hotel.service.RoomTypesService;
 public class RoomTypeController {  
     @Autowired
     private RoomTypesService roomTypesService;
-    @GetMapping("/room-types")
+    @GetMapping("/room-types/")
     public ResponseEntity<List<RoomTypesResponse>> getAllRoomTypes() 
     {
         return roomTypesService.getAllRoomTypes();

@@ -14,7 +14,7 @@ import com.hotel.hotel.service.GuestService;
 public class GuestController {
     @Autowired
     private GuestService guestService;
-    @GetMapping("/guests")
+    @GetMapping("/guests/")
     public ResponseEntity<List<GuestResponse>> getAllGuest() 
     {
         return guestService.getAllGuest();

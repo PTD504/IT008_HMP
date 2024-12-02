@@ -15,7 +15,7 @@ public class BedDetailController {
     @Autowired
     private BedDetailService bedDetailService;
 
-    @GetMapping("/bed-details") 
+    @GetMapping("/bed-details/") 
     public ResponseEntity<List<BedDetailResponse>> getAllBedDetail() 
     {
         return bedDetailService.getAllBedDetail();

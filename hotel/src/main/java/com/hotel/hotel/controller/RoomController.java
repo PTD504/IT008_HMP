@@ -15,7 +15,7 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
-    @GetMapping("/rooms") 
+    @GetMapping("/rooms/") 
     public ResponseEntity<List<RoomResponse>> getAllRoom() 
     {
         return roomService.listAllRoom();
