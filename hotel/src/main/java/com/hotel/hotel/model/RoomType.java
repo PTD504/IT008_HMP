@@ -30,17 +30,29 @@ public class RoomType {
     @JoinColumn(name="BEDDETAILID", columnDefinition = "INT", referencedColumnName = "ID") 
     private BedDetail bedDetail;
 
+    @Column(name="USABLE", columnDefinition = "BOOLEAN") 
+    private Boolean usable;
+
     public RoomType() 
     {
 
     } 
-    public RoomType(int id, String roomTypeText, int size, int price, BedDetail bedDetail) 
+    public RoomType(String roomTypeText, int size, int price, BedDetail bedDetail) 
     {
-        this.id=id;
+        
         this.roomTypeText=roomTypeText;
         this.size=size; 
         this.price=price;
         this.bedDetail=bedDetail;
+        this.usable=true;
+    } 
+    public boolean getUsable()
+    {
+        return this.usable;
+    } 
+    public void setUsable(boolean usable) 
+    {
+        this.usable=usable;
     }
     public int getId()
     {

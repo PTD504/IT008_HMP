@@ -24,10 +24,12 @@ public class BookingController {
     public ResponseEntity<List<BookingResponse>> getAllBookings() {
         return bookingService.getAllBookings();
     }  
-    @PostMapping("/add-booking") 
+    @PostMapping("/bookings/") 
     public ResponseEntity<addBookingRequest> addBooking(@RequestBody addBookingRequest request) 
     {
         return bookingService.addBooking(request);
-    }
+    } 
+   
+
     
 }

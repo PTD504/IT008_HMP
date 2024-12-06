@@ -5,7 +5,7 @@ import java.sql.Date;
 public class addBookingRequest { 
     private Date checkinDate;
     private Date checkoutDate;
-    private int roomId;
+    private String roomId;
     private String citizenId;
     private String guestName;
     private String phone;
@@ -18,7 +18,7 @@ public class addBookingRequest {
     {
 
     } 
-    public addBookingRequest(Date checkinDate, Date checkoutDate, int roomId, String citizenId, String guestName, String phone, String email, Date dob, String gender, String address) 
+    public addBookingRequest(Date checkinDate, Date checkoutDate, String roomId, String citizenId, String guestName, String phone, String email, Date dob, String gender, String address) 
     {
         this.checkinDate=checkinDate;
         this.checkoutDate=checkoutDate;
@@ -39,7 +39,7 @@ public class addBookingRequest {
     {
         return this.checkoutDate;
     }
-    public int getRoomId() 
+    public String getRoomId() 
     {
         return this.roomId;
     } 

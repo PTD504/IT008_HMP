@@ -1,6 +1,7 @@
 package com.hotel.hotel.model;
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,15 +21,15 @@ public class Booking {
     @Column(name="ID", columnDefinition = "INT")
     private int id; 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="ROOMID", columnDefinition = "INT", referencedColumnName = "ID") 
     private Room room;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="GUESTID", columnDefinition = "INT", referencedColumnName = "ID") 
     private Guest guest;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="STAFFID", columnDefinition = "INT", referencedColumnName = "ID") 
     private Staff staff;
 
@@ -47,9 +48,9 @@ public class Booking {
     {
 
     } 
-    public Booking(int id, Room room, Guest guest, Staff staff, Date checkinDate, Date checkoutDate, boolean isPaid, int totalPrice) 
+    public Booking(Room room, Guest guest, Staff staff, Date checkinDate, Date checkoutDate, boolean isPaid, int totalPrice) 
     {
-        this.id=id;
+        
         this.room=room;
         this.guest=guest;
         this.staff=staff;

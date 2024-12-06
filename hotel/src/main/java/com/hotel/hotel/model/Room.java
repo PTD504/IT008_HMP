@@ -28,19 +28,22 @@ public class Room {
 
     @ManyToOne
     @JoinColumn(name="ROOMTYPEID", columnDefinition = "INT", referencedColumnName = "ID") 
-    private RoomType roomType;
+    private RoomType roomType; 
+    @Column(name="USABLE", columnDefinition = "BOOLEAN") 
+    private Boolean usable;
 
     public Room() 
     {
 
     } 
-    public Room(int id, String roomNumber, int floor, int state, RoomType roomType) 
+    public Room(String roomNumber, int floor, int state, RoomType roomType) 
     {
-        this.id=id;
+        
         this.roomNumber=roomNumber;
         this.floor=floor;
         this.state=state;
         this.roomType=roomType; 
+        this.usable=true; 
     }
     public int getId() 
     {
@@ -78,6 +81,18 @@ public class Room {
     public void setRoomType(RoomType roomType) 
     {
         this.roomType=roomType;
+    } 
+    public boolean getUsable() 
+    {
+        return this.usable;
+    } 
+    public void setUsable(boolean usable) 
+    {
+        this.usable=usable;
+    } 
+    public void setRoomNumber(String roomNumber) 
+    {
+        this.roomNumber=roomNumber;
     }
 
 }

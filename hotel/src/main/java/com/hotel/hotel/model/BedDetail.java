@@ -18,16 +18,19 @@ public class BedDetail {
     private int id; 
 
     @Column(name="BEDDETAILTEXT", columnDefinition = "VARCHAR(100)") 
-    private String bedDetailText;
+    private String bedDetailText; 
+    @Column(name="USABLE", columnDefinition = "BOOLEAN") 
+    private boolean usable;
 
     public BedDetail()
     {
 
     } 
-    public BedDetail(int id, String bedDetailText) 
+    public BedDetail(String bedDetailText) 
     {
-        this.id=id;
-        this.bedDetailText=bedDetailText;
+        
+        this.bedDetailText=bedDetailText; 
+        this.usable=true;
     }
     public int getId() 
     {
@@ -39,5 +42,13 @@ public class BedDetail {
     public void setBedDetailText(String bedDetailText) 
     { 
         this.bedDetailText=bedDetailText;
+    } 
+    public boolean getUsable()
+    {
+        return this.usable;
+    } 
+    public void setUsable(boolean usable) 
+    {
+        this.usable=usable;
     }
 }

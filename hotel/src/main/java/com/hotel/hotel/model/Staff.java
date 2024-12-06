@@ -46,15 +46,17 @@ public class Staff {
 
     @ManyToOne
     @JoinColumn(name="STAFFTYPEID", columnDefinition = "INT", referencedColumnName = "ID") 
-    private StaffType staffType;
+    private StaffType staffType; 
+    @Column(name="USABLE", columnDefinition = "BOOLEAN") 
+    private Boolean usable;
 
     public Staff() 
     {
 
     } 
-    public Staff(int id, String citizenId, String name, String phone, String email, Date dob, String gender, String address, Date createdDate, StaffType staffType)
+    public Staff( String citizenId, String name, String phone, String email, Date dob, String gender, String address, Date createdDate, StaffType staffType)
     {
-        this.id=id;
+        
         this.citizenId=citizenId;
         this.name=name;
         this.phone=phone;
@@ -63,7 +65,16 @@ public class Staff {
         this.gender=gender;
         this.address=address;
         this.createdDate=createdDate;
-        this.staffType=staffType;
+        this.staffType=staffType; 
+        this.usable=true;
+    } 
+    public boolean getUsable()
+    {
+        return this.usable;
+    } 
+    public void setUsable(boolean usable) 
+    {
+        this.usable=usable;
     }
     public int getId() 
     {

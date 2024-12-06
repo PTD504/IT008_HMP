@@ -16,17 +16,27 @@ public class StaffType {
     private int id;  
 
     @Column(name="STAFFTYPETEXT", columnDefinition = "VARCHAR(100)") 
-    private String staffTypeText;
+    private String staffTypeText; 
+    @Column(name="USABLE", columnDefinition = "BOOLEAN") 
+    private Boolean usable;
 
     public StaffType() 
     {
 
     }
-    public StaffType(int id, String staffTypeText)
+    public StaffType(String staffTypeText)
     {
-        this.id=id;
+        this.usable=true;
         this.staffTypeText=staffTypeText;
+    }  
+    public boolean getUsable()
+    {
+        return this.usable;
     } 
+    public void setUsable(boolean usable) 
+    {
+        this.usable=usable;
+    }
     public int getId() 
     {
         return this.id;

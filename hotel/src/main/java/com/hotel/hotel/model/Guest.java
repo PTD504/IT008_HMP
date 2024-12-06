@@ -40,9 +40,9 @@ public class Guest {
     {
 
     } 
-    public Guest(int id, String citizenId, String name, String phone, String email, Date dob, String gender, String address) 
+    public Guest( String citizenId, String name, String phone, String email, Date dob, String gender, String address) 
     {
-        this.id=id;
+        
         this.citizenId=citizenId;
         this.name=name;
         this.phone=phone;

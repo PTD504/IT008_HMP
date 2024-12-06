@@ -4,9 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hotel.hotel.model.Room;
+import com.hotel.hotel.request.RoomRequest;
 import com.hotel.hotel.response.RoomResponse;
 import com.hotel.hotel.service.RoomService;
 
@@ -19,6 +26,24 @@ public class RoomController {
     public ResponseEntity<List<RoomResponse>> getAllRoom() 
     {
         return roomService.listAllRoom();
+    }
+
+    @PostMapping("/rooms/create") 
+    public ResponseEntity<Room> createRoom(@RequestBody RoomRequest request) 
+    {
+        return roomService.createNewRoom(request);
+    }
+
+    @PutMapping("/rooms/update/{id}") 
+    public ResponseEntity<Room> updateRoom(@PathVariable int id, @RequestBody RoomRequest request) 
+    {
+        return roomService.updateRoom(id, request);
+    }
+
+    @DeleteMapping("/rooms/delete/{id}") 
+    public ResponseEntity<String> deleteRoom(@PathVariable int id) 
+    {
+        return roomService.deleteRoom(id);
     }
 
 }

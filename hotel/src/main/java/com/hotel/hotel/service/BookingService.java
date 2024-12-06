@@ -9,15 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hotel.hotel.model.Booking;
 import com.hotel.hotel.model.Guest;
 import com.hotel.hotel.model.Room;
+import com.hotel.hotel.model.Staff;
 import com.hotel.hotel.repository.BookingRepository;
 import com.hotel.hotel.repository.GuestRepository;
 import com.hotel.hotel.repository.RoomRepository;
+import com.hotel.hotel.repository.StaffRepository;
 import com.hotel.hotel.request.addBookingRequest;
 import com.hotel.hotel.response.BookingResponse;
+
+import jakarta.transaction.Transactional;
 
 
 
@@ -28,8 +33,10 @@ public class BookingService {
     @Autowired
     private RoomRepository roomRepo;
     @Autowired
-    private GuestRepository guestRepo;
-
+    private GuestRepository guestRepo; 
+    @Autowired 
+    private StaffRepository staffRepo;
+    @Transactional
     public ResponseEntity<List<BookingResponse>> getAllBookings() {
         // Gọi phương thức tùy chỉnh từ repository
         List<BookingResponse> listRes = new ArrayList<>();
@@ -43,32 +50,37 @@ public class BookingService {
     }
 
     public ResponseEntity<addBookingRequest> addBooking(addBookingRequest request) 
-    {
-        Room room = roomRepo.findById(request.getRoomId()).orElse(null);
-        if(room==null||room.getState()!=0)
-        {
+    { 
+       Room room = roomRepo.findById(Integer.parseInt(request.getRoomId())).orElse(null);
+       if(room==null||room.getState()!=0)
+       {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-        Guest guest = guestRepo.findByCitizenId(request.getCitizenId());
-        if(guest==null) 
-        { 
-            int newId= guestRepo.findAll().size()+1;
-            guest= new Guest(newId, request.getCitizenId(), request.getGuestName(), request.getPhone(), request.getEmail(), request.getDob(), request.getGender(), request.getAddress());
-            
-        }
-         
-        int newBookingId= bookingRepository.findAll().size()+1; 
-        LocalDate ciDate=request.getCheckinDate().toLocalDate();
-        LocalDate coDate=request.getCheckoutDate().toLocalDate();
-        int distance= (int)ChronoUnit.DAYS.between(ciDate, coDate);
-        int price= room.getRoomType().getPrice()*distance;
-        Booking newBooking = new Booking(newBookingId, room, guest, null, request.getCheckinDate(), request.getCheckoutDate(), false, price); 
-        room.setState(1); 
-        roomRepo.save(room);
-        guestRepo.save(guest);
-        bookingRepository.save(newBooking); 
-        return new ResponseEntity<>(request, HttpStatus.OK);
-
+       }
+       room.setState(1);
+       roomRepo.save(room);
+       Guest guest = guestRepo.findByCitizenId(request.getCitizenId());
+       if(guest.equals(null))
+       {
+            guest= new Guest(request.getCitizenId(), request.getGuestName(), request.getPhone(), request.getEmail(), request.getDob(), request.getGender(), request.getAddress());
+       }
+       else {
+            guest.setName(request.getGuestName());
+            guest.setPhone(request.getPhone());
+            guest.setEmail(request.getEmail());
+            guest.setDob(request.getDob());
+            guest.setGender(request.getGender());
+            guest.setAddress(request.getAddress());
+       }
+       guestRepo.save(guest);
+       Staff staff = staffRepo.findById(1).orElse(null);
+       LocalDate date1= request.getCheckinDate().toLocalDate();
+       LocalDate date2= request.getCheckoutDate().toLocalDate();
+       int daysBetween =(int) ChronoUnit.DAYS.between(date1, date2);
+       int totalPrice= daysBetween*room.getRoomType().getPrice();
+       Booking newBooking = new Booking(room, guest, staff, request.getCheckinDate(), request.getCheckoutDate(), false, totalPrice);
+       bookingRepository.save(newBooking);
+       return new ResponseEntity<>(request, HttpStatus.OK);
 
     }
+    
 }
