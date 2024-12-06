@@ -19,6 +19,7 @@ import com.hotel.hotel.repository.BookingRepository;
 import com.hotel.hotel.repository.GuestRepository;
 import com.hotel.hotel.repository.RoomRepository;
 import com.hotel.hotel.repository.StaffRepository;
+import com.hotel.hotel.request.BookingRenewalRequest;
 import com.hotel.hotel.request.addBookingRequest;
 import com.hotel.hotel.response.BookingResponse;
 
@@ -80,6 +81,58 @@ public class BookingService {
        Booking newBooking = new Booking(room, guest, staff, request.getCheckinDate(), request.getCheckoutDate(), false, totalPrice);
        bookingRepository.save(newBooking);
        return new ResponseEntity<>(request, HttpStatus.OK);
+
+    } 
+
+
+    public ResponseEntity<Booking> checkIn(int bookingId) 
+    {
+          Booking booking = bookingRepository.findById(bookingId).orElse(null);
+          if(booking==null) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+          Room room = booking.getRoom();
+          if(room.getState()!=1)
+          {
+               return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+          } 
+          room.setState(2);
+          roomRepo.save(room);
+          return new ResponseEntity<>(booking, HttpStatus.OK);
+    } 
+
+    public ResponseEntity<Booking> checkOut(int bookingId) 
+    {
+          Booking booking = bookingRepository.findById(bookingId).orElse(null);
+          if(booking==null) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+          Room room = booking.getRoom();
+          if(room.getState()!=2)
+          {
+               return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+          } 
+          room.setState(0);
+          roomRepo.save(room);
+          booking.setIsPaid(true); 
+          bookingRepository.save(booking);
+          return new ResponseEntity<>(booking, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Booking> renewal(int bookingId, BookingRenewalRequest request) 
+    {
+          Booking booking = bookingRepository.findById(bookingId).orElse(null);
+          if(booking==null) return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+          Room room = booking.getRoom();
+          if(room.getState()!=2)
+          {
+               return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+          } 
+          LocalDate date2= booking.getCheckoutDate().toLocalDate();
+          LocalDate date3= request.getNewCheckoutDate().toLocalDate(); 
+          int daysBetween =(int) ChronoUnit.DAYS.between(date2, date3);
+          int totalPrice=booking.getTotalPrice()+ daysBetween*room.getRoomType().getPrice();
+          booking.setCheckoutDate(request.getNewCheckoutDate());
+          booking.setTotalPrice(totalPrice);
+          bookingRepository.save(booking);
+          return new ResponseEntity<>(booking, HttpStatus.OK);
+          
 
     }
     

@@ -107,6 +107,10 @@ public class Booking {
     public void setCheckinDate(Date checkinDate) 
     {
         this.checkinDate=checkinDate;
+    } 
+    public void setCheckoutDate(Date checkoutDate) 
+    {
+        this.checkoutDate=checkoutDate;
     }
     public void setIsPaid(boolean isPaid) 
     {
