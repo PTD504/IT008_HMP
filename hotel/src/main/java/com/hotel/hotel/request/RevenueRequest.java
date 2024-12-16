@@ -1,26 +1,17 @@
 package com.hotel.hotel.request;
 
 public class RevenueRequest { 
-    private int month;
-    private int year;
-
-    public RevenueRequest() 
+    private int revenueYear;
+    public RevenueRequest()
     {
 
     } 
-    public RevenueRequest(int month, int year) 
+    public RevenueRequest(int revenueYear) 
     {
-        this.month=month;
-        this.year=year;
+        this.revenueYear=revenueYear;
     } 
-
-    public int getMonth() 
+    public int getRevenueYear() 
     {
-        return this.month;
-    } 
-    public int getYear() 
-    {
-        return this.year;
+        return this.revenueYear;
     }
-
 }

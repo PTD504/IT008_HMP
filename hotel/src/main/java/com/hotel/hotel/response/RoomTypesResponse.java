@@ -7,7 +7,8 @@ public class RoomTypesResponse {
     private String roomTypeText;
     private int size;
     private int price;
-    private String bedDetailText; 
+    private String bedDetailText;  
+    private int bedDetailId;
 
     public RoomTypesResponse() 
     {
@@ -19,8 +20,13 @@ public class RoomTypesResponse {
         this.roomTypeText= roomType.getRoomTypeText();
         this.size=roomType.getSize();
         this.price=roomType.getPrice();
-        this.bedDetailText=roomType.getBedDetail().getBedDetailText();
-    } 
+        this.bedDetailText=roomType.getBedDetail().getBedDetailText(); 
+        this.bedDetailId=roomType.getBedDetail().getId();
+    }  
+    public int getBedDetailId() 
+    {
+        return this.bedDetailId;
+    }
     public int getId() 
     {
         return this.id;

@@ -43,6 +43,8 @@ public class Booking {
 
     @Column(name="TOTALPRICE", columnDefinition = "INT") 
     private int totalPrice;
+    @Column(name="USABLE", columnDefinition = "BOOLEAN")
+    private boolean usable;
 
     public Booking() 
     {
@@ -50,7 +52,7 @@ public class Booking {
     } 
     public Booking(Room room, Guest guest, Staff staff, Date checkinDate, Date checkoutDate, boolean isPaid, int totalPrice) 
     {
-        
+        this.usable=true;
         this.room=room;
         this.guest=guest;
         this.staff=staff;
@@ -59,7 +61,14 @@ public class Booking {
         this.isPaid=isPaid;
         this.totalPrice=totalPrice;
     } 
-
+    public boolean getUsable() 
+    {
+        return this.usable;
+    }
+    public void setUsable(boolean usable) 
+    {
+        this.usable=usable;
+    }
     public int getId() 
     {
         return this.id;

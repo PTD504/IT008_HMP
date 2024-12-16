@@ -12,13 +12,14 @@ public class addBookingRequest {
     private String email;
     private Date dob;
     private String gender;
-    private String address;
+    private String address; 
+    private int staffId;
 
     public addBookingRequest() 
     {
 
     } 
-    public addBookingRequest(Date checkinDate, Date checkoutDate, String roomId, String citizenId, String guestName, String phone, String email, Date dob, String gender, String address) 
+    public addBookingRequest(Date checkinDate, Date checkoutDate, String roomId, String citizenId, String guestName, String phone, String email, Date dob, String gender, String address, int staffId) 
     {
         this.checkinDate=checkinDate;
         this.checkoutDate=checkoutDate;
@@ -29,7 +30,12 @@ public class addBookingRequest {
         this.email=email;
         this.dob=dob;
         this.gender=gender;
-        this.address=address;
+        this.address=address; 
+        this.staffId=staffId;
+    } 
+    public int getStaffId() 
+    {
+        return this.staffId;
     }
     public Date getCheckinDate() 
     {

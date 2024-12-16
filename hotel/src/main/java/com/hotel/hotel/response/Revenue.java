@@ -1,33 +1,28 @@
 package com.hotel.hotel.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Revenue {
-    public int month;
-    public int year;
-    public List<RevenueDetail> listRevenueDetail;
-
-    public Revenue()
+    private List<RevenueData> revenueData;
+    public Revenue() 
     {
-
+        this.revenueData=new ArrayList<>();
+    } 
+    public Revenue(List<RevenueData> revenueData)
+    {
+        this.revenueData=revenueData;
     }
-    public Revenue(int month, int year, List<RevenueDetail> listRevenueDetail) 
-    {
-        this.month=month;
-        this.year=year;
-        this.listRevenueDetail=listRevenueDetail;
-    } 
 
-    public int getMonth() {
-        return this.month;
-    } 
-    public int getYear() 
+    public List<RevenueData> getRevenueData() 
     {
-        return this.year;
+        return this.revenueData;
     } 
-    public List<RevenueDetail> getListRevenueDetail() 
+    public void addRevenueData(RevenueData revenueData) 
     {
-        return this.listRevenueDetail;
+        this.revenueData.add(revenueData);
     }
+    
+
 
 }

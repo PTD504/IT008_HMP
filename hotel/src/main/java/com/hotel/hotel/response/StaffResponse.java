@@ -15,7 +15,7 @@ public class StaffResponse {
     private String address;
     private Date createdDate;
     private String staffTypeText;
-
+    private int staffTypeId;
     public StaffResponse() 
     {
 
@@ -32,7 +32,12 @@ public class StaffResponse {
         this.address=staff.getAddress();
         this.createdDate=staff.getCreatedDate();
         this.staffTypeText=staff.getStaffType().getStaffTypeText();
+        this.staffTypeId=staff.getStaffType().getId();
     } 
+    public int getStaffTypeId() 
+    {
+        return this.staffTypeId;
+    }
     public int getId() 
     {
         return this.id;

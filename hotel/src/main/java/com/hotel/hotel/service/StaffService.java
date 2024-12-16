@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.hotel.hotel.model.Account;
 import com.hotel.hotel.model.Staff;
 import com.hotel.hotel.model.StaffType;
+import com.hotel.hotel.repository.AccountRepository;
 import com.hotel.hotel.repository.StaffRepository;
 import com.hotel.hotel.repository.StaffTypeRepository;
 import com.hotel.hotel.request.StaffRequest;
@@ -22,6 +24,9 @@ public class StaffService {
     private StaffRepository staffRepo;
     @Autowired
     private StaffTypeRepository staffTypeRepo;
+
+    @Autowired 
+    private AccountRepository accountRepo;
 
     public ResponseEntity<List<StaffResponse>> getAllStaff() 
     {
@@ -76,7 +81,13 @@ public class StaffService {
         {
             return new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
         } 
+        Account account = accountRepo.findByStaff(staff);
+        if(account!=null)
+        {
+            accountRepo.delete(account);
+        }
         staff.setUsable(false); 
+        staffRepo.save(staff);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 }

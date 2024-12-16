@@ -73,6 +73,7 @@ public class RoomService {
             return new ResponseEntity<>("Fail", HttpStatus.BAD_REQUEST);
         } 
         room.setUsable(false);
+        roomRepo.save(room);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 

@@ -37,9 +37,9 @@ public class Account {
     {
 
     } 
-    public Account(int id, String email, String password, Staff staff, int type) 
+    public Account( String email, String password, Staff staff, int type) 
     {
-        this.id=id;
+        
         this.email=email;
         this.password=password;
         this.staff=staff;
@@ -64,6 +64,10 @@ public class Account {
     public int getType() 
     {
         return this.type;
+    }
+    public void setPassword(String password) 
+    {
+        this.password=password;
     }
 
 
